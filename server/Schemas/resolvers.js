@@ -1,6 +1,6 @@
 const {User, Book} = require('../models');
-const {loginToken} = require('../utils/auth');
-const {Error} = require('apollo-server-express');
+const {signToken} = require('../utils/auth');
+const {AuthenticationError} = require('apollo-server-express');
 
 const resolvers = {
     
@@ -13,7 +13,7 @@ const resolvers = {
              return userData;
          }
 
-         throw new Error('Please log in');
+         throw new AuthenticationError('Please log in');
 
 
      }
@@ -26,15 +26,15 @@ Mutation: {
         const user= await User.findOne({email});
 
         if(!user) {
-            throw new Error('User not found');
+            throw new AuthenticationError('User not found');
         }
 
-        const passwordCorrect = await user.isCorrect({password});
+        const passwordCorrect = await user.isCorrectPassword({password});
 
         if(!passwordCorrect) {
-            throw new Error('Incorrect Password');
+            throw new AuthenticationError('Incorrect Password');
         }
-        const token = loginToken(user);
+        const token = signToken(user);
         return{token, user};
     },
 
@@ -50,7 +50,7 @@ Mutation: {
 
     newUser: async(parent, args) => {
         const user = await User.create(args);
-        const token = loginToken(user);
+        const token = signToken(user);
 
         return{token, user}
     },
@@ -65,7 +65,7 @@ Mutation: {
            return updatedUser;
         }
 
-        throw new Error('Please log in')
+        throw new AuthenticationError('Please log in')
 
     }
 

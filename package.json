@@ -15,15 +15,13 @@
   "devDependencies": {
     "concurrently": "^5.1.0"
   },
-  "dependencies": {
-    "@apollo/react-hooks": "^4.0.0",
-    "apollo-boost": "^0.4.9",
-    "apollo-server": "^3.3.0",
-    "express-graphql": "^0.12.0",
-    "graphql": "^15.5.3",
-    "graphql-tag": "^2.12.5",
-    "install": "^0.13.0",
-    "npm": "^7.23.0",
-    "react-apollo": "^3.1.5"
-  }
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielkl12/homework-21-books.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danielkl12/homework-21-books/issues"
+  },
+  "homepage": "https://github.com/danielkl12/homework-21-books#readme"
 }
